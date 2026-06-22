@@ -4,7 +4,7 @@ const app = express();
 const cors = require("cors");
 const dotenv = require("dotenv");
 const path = require("path");
-const bodyParser = require('body-parser')
+const bodyParser = require("body-parser");
 
 const authRoutes = require("./routes/auth.route");
 const usersRoutes = require("./routes/users.route");
@@ -23,9 +23,6 @@ const aircraftTypesRoutes = require("./routes/aircraft_types.route");
 const seasonFlightsRoutes = require("./routes/season_flights.route");
 const dailyFlightsRoutes = require("./routes/daily_flights.route");
 const filtersRoutes = require("./routes/filters.route");
-
-
-
 
 // Load environment variables
 dotenv.config();
@@ -62,8 +59,6 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-
-
 const routePath = "/api/v1";
 // Routes
 app.use(routePath + "/auth", authRoutes);
@@ -98,7 +93,7 @@ app.use((err, req, res, next) => {
 });
 
 // Start the server
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 8001;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

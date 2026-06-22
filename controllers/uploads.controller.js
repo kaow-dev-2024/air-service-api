@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 8001;
 
 const uploadSingle = async (req, res) => {
   const file = req.file;
@@ -24,9 +24,11 @@ const uploadSingle = async (req, res) => {
     return res.status(409).json({ message: "File size exceeds 3MB" });
   }
 
-  let urlFile = `http://${process.env.BASE_URL}:${PORT}/uploads/` + file.filename;
-  return res.status(200).json({ message: "File uploaded successfully", fileUrl: urlFile });
-
+  let urlFile =
+    `http://${process.env.BASE_URL}:${PORT}/uploads/` + file.filename;
+  return res
+    .status(200)
+    .json({ message: "File uploaded successfully", fileUrl: urlFile });
 };
 
 const uploadMultiple = async (req, res) => {
@@ -51,12 +53,15 @@ const uploadMultiple = async (req, res) => {
       return res.status(409).json({ message: "File size exceeds 3MB" });
     }
   }
-  const fileUrls = files.map(file => `http://${process.env.BASE_URL}:${PORT}/uploads/` + file.filename);
-  return res.status(200).json({ message: "Files uploaded successfully", fileUrls });
-}
-
+  const fileUrls = files.map(
+    (file) => `http://${process.env.BASE_URL}:${PORT}/uploads/` + file.filename,
+  );
+  return res
+    .status(200)
+    .json({ message: "Files uploaded successfully", fileUrls });
+};
 
 module.exports = {
   uploadSingle,
-  uploadMultiple
+  uploadMultiple,
 };

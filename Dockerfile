@@ -10,6 +10,6 @@ COPY . .
 
 RUN mkdir -p uploads
 
-EXPOSE 5001
+EXPOSE 8001
 
 CMD ["npm","run","start:prod"]

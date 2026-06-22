@@ -2,7 +2,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const BASE_URL = process.env.TEST_BASE_URL || "http://localhost:5001/api/v1";
+const BASE_URL = process.env.TEST_BASE_URL || "http://localhost:8001/api/v1";
 const ADMIN_LOGIN = process.env.TEST_ADMIN_LOGIN || "paiadmin";
 const ADMIN_PASSWORD = process.env.TEST_ADMIN_PASSWORD || "paiadmin@passwd";
 
@@ -249,7 +249,8 @@ const main = async () => {
   });
   const userToken = userLogin.body && userLogin.body.token;
   const refreshToken = userLogin.body && userLogin.body.refresh_token;
-  const userId = userLogin.body && userLogin.body.user && userLogin.body.user.user_id;
+  const userId =
+    userLogin.body && userLogin.body.user && userLogin.body.user.user_id;
 
   if (userToken) {
     await callApi({
@@ -301,7 +302,11 @@ const main = async () => {
       name: "directions",
       idKey: "direction_id",
       uniqueKey: "name",
-      createBody: { name: `${marker}-direction`, remark: marker, is_active: true },
+      createBody: {
+        name: `${marker}-direction`,
+        remark: marker,
+        is_active: true,
+      },
       updateBody: { remark: `${marker}-updated` },
     },
     {
@@ -329,7 +334,11 @@ const main = async () => {
       name: "terminals",
       idKey: "terminal_id",
       uniqueKey: "name",
-      createBody: { name: `${marker}-terminal`, remark: marker, is_active: true },
+      createBody: {
+        name: `${marker}-terminal`,
+        remark: marker,
+        is_active: true,
+      },
       updateBody: { remark: `${marker}-updated` },
     },
     {
@@ -350,7 +359,11 @@ const main = async () => {
       name: "counters",
       idKey: "counter_id",
       uniqueKey: "name",
-      createBody: { name: `${marker}-counter`, remark: marker, is_active: true },
+      createBody: {
+        name: `${marker}-counter`,
+        remark: marker,
+        is_active: true,
+      },
       updateBody: { remark: `${marker}-updated` },
     },
     {
@@ -461,7 +474,12 @@ const main = async () => {
     allowAnyUnder500: true,
   });
 
-  const usersId = findIdInList(usersList.body, "user_id", "username", usersCreate.username);
+  const usersId = findIdInList(
+    usersList.body,
+    "user_id",
+    "username",
+    usersCreate.username,
+  );
   if (usersId) {
     await callApi({
       method: "PUT",
@@ -608,7 +626,9 @@ const main = async () => {
   const failures = results.filter((x) => !x.ok);
   const passes = results.length - failures.length;
 
-  console.log(`\nIntegration test summary: pass=${passes}, fail=${failures.length}, total=${results.length}`);
+  console.log(
+    `\nIntegration test summary: pass=${passes}, fail=${failures.length}, total=${results.length}`,
+  );
   if (failures.length) {
     console.log("\nFailed checks:");
     failures.forEach((f) => {
