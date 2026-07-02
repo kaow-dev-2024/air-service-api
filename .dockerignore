@@ -7,5 +7,5 @@ yarn-error.log
 .env.*
 Dockerfile*
 docker-compose*.yml
-README.md
-uploads
+# README.md
+# uploads
